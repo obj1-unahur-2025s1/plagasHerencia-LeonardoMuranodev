@@ -1,3 +1,5 @@
+import plagas.*
+
 class Hogar {
   var property nivelMugre 
   var property confort 
@@ -10,8 +12,9 @@ class Hogar {
 }
 
 class Huerta {
-  var property produccion 
-  var property confort 
+  var produccion 
+
+  method produccion() = produccion
 
   method esBueno() = produccion > nivelProduccion.nivelProduccionRequerido()
 
@@ -35,7 +38,7 @@ class Mascota {
 }
 
 class Barrio {
-  const property elementos = []
+  const elementos = []
 
   //Metodos de consulta
   method esBueno(unElemento) = unElemento.esBueno()
@@ -44,4 +47,9 @@ class Barrio {
 
   method cantElementosBuenos() = elementos.count({elemento => elemento.esBueno()})
   method cantElementosMalos() = elementos.count({elemento =>  not elemento.esBueno()})
+
+  //metodos de indicacion
+  method agregarElementos(listaElemento) {
+    elementos.addAll(listaElemento)
+  }
 }

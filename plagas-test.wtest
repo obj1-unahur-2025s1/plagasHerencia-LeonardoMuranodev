@@ -1,0 +1,57 @@
+import elementos.*
+import plagas.*
+
+describe "Prueba del tp de plagas" {
+  //barrio
+  const miBarrio = new Barrio()
+
+  //Elementos
+  const miHogar = new Hogar(nivelMugre=10, confort=30)
+  const miHuerta = new Huerta(produccion=500)
+  const miMascota = new Mascota(salud=200)
+
+  //Plagas
+  const cucas = new Cucarachas(poblacion=10, pesoPromedio=8)
+  const pulgitas = new Pulgas(poblacion=50)
+  const garrapatitas = new Garrapatas(poblacion=5)
+  const dengues = new Mosquitos(poblacion=12)
+
+  method initialize() {
+    miBarrio.agregarElementos([miHogar, miHuerta, miMascota])
+    nivelProduccion.nivelProduccionRequerido(490)
+  }
+
+  test "la cantidad de cosas buenas de miBarrio es de 2, y la cantidad de cosas malas es de 1, 
+  por lo que es copado" {
+    assert.equals(2, miBarrio.cantElementosBuenos())
+    assert.equals(1, miBarrio.cantElementosMalos())
+    assert.that(miBarrio.esCopado())
+  }
+
+  test "miHogar es atacado por cucas, el peso promedio de estas pasa a 10 y su poblacion aumenta
+  a 11, por lo que si transmiten enfermedades. El nivelDeMugre de miHogar aumenta en 5.5;
+  pr lo que no es bueno" {
+    cucas.atacar(miHogar)
+    assert.equals(10, cucas.pesoPromedio())
+    assert.equals(11, cucas.poblacion())
+    assert.that(cucas.transmiteEnfermedades())
+    assert.notThat(miHogar.esBueno())
+  }
+  test "dengues atacan a mi mascota, la poblacion aumenta a 13, por lo que no transmiten
+  enfermedades. La salud de la mascota no se ve afectada " {
+    dengues.atacar(miMascota)
+    assert.equals(13, dengues.poblacion())
+    assert.notThat(dengues.transmiteEnfermedades())
+    assert.equals(200, miMascota.salud())
+  }
+
+  test "miHuerta es atacada por las pulguitas. La poblacion de las pulguitas aumenta a 55,
+  transmiten enfermedades. Le sacan 21 a la produccion de la huerta, queda en 479.
+  Ahora, no es buena la huerta" {
+    pulgitas.atacar(miHuerta)
+    assert.equals(55, pulgitas.poblacion())
+    assert.that(pulgitas.transmiteEnfermedades())
+    assert.equals(479, miHuerta.produccion())
+    assert.notThat(miHuerta.esBueno())
+  }
+}

@@ -1,8 +1,12 @@
+import elementos.*
 //clase padre = super clase ---> El hijo dice quien es su padre. inherits es la palabra reservada
 
 //El metodo abstracto hace que la clase sea una clase abstracta, lo cual hace que no pueda instanciarla, algo que es util aca
 class Plaga {
     var poblacion
+
+    //Metodos de consulta
+    method poblacion() = poblacion
     method daño() = poblacion
     method transmiteEnfermedades() = poblacion >= 10 && self.condicionAdicional()
     method condicionAdicional() //metodo abstracto: debe estar la condicion adicional si se usa, sino fallara
@@ -14,7 +18,7 @@ class Plaga {
     }
 
     method sufrirEfectosDeAtaque() {
-        poblacion += poblacion * 0.1
+        poblacion += (poblacion * 0.1).round()
     }
 }
 
@@ -25,6 +29,9 @@ class Plaga {
 //super(): el metodo tiene que tener el mismo nombre para que super funcione. Ademas de la palabra override del principio
 class Cucarachas inherits Plaga{
     var pesoPromedio
+
+    //metodos de consulta
+    method pesoPromedio() = pesoPromedio
 
     override method daño() = super() * 0.5
     override method condicionAdicional() = pesoPromedio >= 10
