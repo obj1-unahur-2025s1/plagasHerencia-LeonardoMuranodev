@@ -5,6 +5,12 @@ import elementos.*
 class Plaga {
     var poblacion
 
+    method initialize() {
+    if(not poblacion.between(0, 1000)){
+      self.error("El nivel de poblacion de la plaga deben ser dato tipo int valido")
+    } 
+  }
+
     //Metodos de consulta
     method poblacion() = poblacion
     method daño() = poblacion
@@ -29,6 +35,12 @@ class Plaga {
 //super(): el metodo tiene que tener el mismo nombre para que super funcione. Ademas de la palabra override del principio
 class Cucarachas inherits Plaga{
     var pesoPromedio
+
+    method initialize() {
+    if(not pesoPromedio.between(0, 1000) ){
+      self.error("El nivel de pesoPromedio de Cucarachas deben ser dato tipo int valido")
+    } 
+  }
 
     //metodos de consulta
     method pesoPromedio() = pesoPromedio

@@ -4,6 +4,12 @@ class Hogar {
   var property nivelMugre 
   var property confort 
 
+  method initialize() {
+    if(not nivelMugre.between(0, 1000) or not confort.between(0, 1000)){
+      self.error("El nivel de Mugre o el confort de Hogar deben ser dato tipo int valido")
+    } 
+  }
+
   method esBueno() = nivelMugre < confort / 2
 
   method sufrirEfectos(unaPlaga) {
@@ -13,6 +19,12 @@ class Hogar {
 
 class Huerta {
   var produccion 
+
+   method initialize() {
+    if(not produccion.between(0, 1000)){
+      self.error("El nivel de produccion de Huerta deben ser dato tipo int valido")
+    } 
+  }
 
   method produccion() = produccion
 
@@ -29,6 +41,12 @@ object nivelProduccion {
 
 class Mascota {
   var property salud
+
+  method initialize() {
+    if(not salud.between(0, 1000)){
+      self.error("El nivel de salud de Mascota deben ser dato tipo int valido")
+    } 
+  }
 
   method esBueno() = salud > 250
 
